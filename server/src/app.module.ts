@@ -5,7 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { OrdersModule } from './orders/orders.module';
 
 @Module({
-  imports: [MongooseModule.forRoot('mongodb+srv://dickenzoh_30:Merngoose2030@cluster0.dbijinl.mongodb.net/?retryWrites=true&w=majority'), OrdersModule],
+  imports: [MongooseModule.forRoot(''), OrdersModule],
   controllers: [AppController],
   providers: [AppService],
 })

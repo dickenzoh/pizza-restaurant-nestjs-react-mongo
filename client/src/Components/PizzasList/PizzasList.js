@@ -1,18 +1,8 @@
 import React, { useState, useEffect, useCallback } from "react";
 import classes from "./PizzasList.module.css";
 import TransitionsModal from "../UI/NewOrderMod";
-import NewOrderMod from "../UI/NewOrderMod";
 
 const PizzasList = (props) => {
-  const [isModal, setIsModal] = useState(false);
-
-  const [enteredName, setEnteredName] = useState("");
-  const [enteredIngredients, setEnteredIngredients] = useState("");
-  const [enteredPrice, setEnteredPrice] = useState("");
-  const [enteredID, setEnteredID] = useState();
-  const [menuList, setMenuList] = useState([]);
-  const [error, setError] = useState(null);
-
   const daat = [
     {
       id: 23353,
