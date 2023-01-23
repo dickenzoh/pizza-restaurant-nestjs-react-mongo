@@ -51,16 +51,19 @@ export default function ReportModal({ reportItem, setCurrentId }) {
         <Fade in={open}>
           <Box sx={style}>
             <Typography id="transition-modal-title" variant="h6" component="h6">
-              Name: {reportItem.name}
+              Order Id: {reportItem.id}
             </Typography>
             <Typography id="transition-modal-title" variant="h6" component="h6">
               Created at: {reportItem.createdAt}
             </Typography>
             <Typography id="transition-modal-title" variant="h6" component="h6">
-              Duration: {reportItem.duration}
+              Peparation Time: {reportItem.duration}
             </Typography>
             <Typography id="transition-modal-title" variant="h6" component="h6">
               Completed at: {reportItem.completedAt}
+            </Typography>
+            <Typography id="transition-modal-title" variant="h6" component="h6">
+              Number of Pizzas: {reportItem.completedAt}
             </Typography>
 
             <Box
@@ -75,8 +78,11 @@ export default function ReportModal({ reportItem, setCurrentId }) {
             >
               <ListItem>
                 <ListItemText primary="Photos" secondary="Jan 9, 2014" />
+              </ListItem>
+              <ListItem>
                 <ListItemText primary="Photos" secondary="Jan 9, 2014" />
-                <ListItemText primary="Photos" secondary="Jan 9, 2014" />
+              </ListItem>
+              <ListItem>
                 <ListItemText primary="Photos" secondary="Jan 9, 2014" />
               </ListItem>
             </List>

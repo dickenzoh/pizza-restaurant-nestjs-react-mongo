@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const API = axios.create({ baseURL: "http://localhost:3000" });
+const API = axios.create({ baseURL: "https://server-ten-sand.vercel.app" });
 
 const initialState = {
   orders: [],
