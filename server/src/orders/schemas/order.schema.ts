@@ -1,13 +1,15 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
+
+// Nested Schema
 @Schema()
-export class OrderClass extends Document {
+export class SingleOrder extends Document {
   @Prop()
   name: string;
 
-  @Prop()
-  toppings: string;
+  @Prop({ type: [String] })
+  toppings: string[];
 
   @Prop()
   status: string;
@@ -15,5 +17,47 @@ export class OrderClass extends Document {
   @Prop()
   duration: number;
 }
+export const SingleOrderSchema = SchemaFactory.createForClass(SingleOrder);
 
+class Toppings {
+  @Prop({ type: String, required: true, lowercase: true })
+  topping: string;
+
+}
+
+// Nested Schema
+@Schema()
+export class PrepTime extends Document {
+  @Prop()
+  dough: number;
+
+  @Prop()
+  toppings: number;
+
+  @Prop()
+  oven: number;
+
+  @Prop()
+  waiter: number;
+}
+export const PrepTimeSchema = SchemaFactory.createForClass(PrepTime);
+
+// Parent Schema
+@Schema()
+export class OrderClass extends Document {
+  @Prop({ type: SingleOrder })
+      orders: SingleOrder;
+  @Prop()
+  createdAt: number;
+
+  @Prop()
+  completedAt: number;
+
+  @Prop()
+  status: string;
+
+  @Prop({ type: PrepTime })
+  preptime:   PrepTime;
+  
+}
 export const OrderSchema = SchemaFactory.createForClass(OrderClass);
