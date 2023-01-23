@@ -28,10 +28,11 @@ const style = {
   p: 4,
 };
 
-export default function ReportModal() {
+export default function ReportModal({ reportItem, setCurrentId }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  console.log(reportItem);
 
   return (
     <div>
@@ -50,16 +51,16 @@ export default function ReportModal() {
         <Fade in={open}>
           <Box sx={style}>
             <Typography id="transition-modal-title" variant="h6" component="h6">
-              Name:
+              Name: {reportItem.name}
             </Typography>
             <Typography id="transition-modal-title" variant="h6" component="h6">
-              Created at:
+              Created at: {reportItem.createdAt}
             </Typography>
             <Typography id="transition-modal-title" variant="h6" component="h6">
-              Duration:
+              Duration: {reportItem.duration}
             </Typography>
             <Typography id="transition-modal-title" variant="h6" component="h6">
-              Completed at:
+              Completed at: {reportItem.completedAt}
             </Typography>
 
             <Box

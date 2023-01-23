@@ -2,42 +2,11 @@ import React, { useState, useEffect, useCallback } from "react";
 import classes from "./PizzasList.module.css";
 import ReportModal from "../UI/ReportModal";
 
-const CompletedPizzasList = (props) => {
-  const completed = [
-    {
-      id: 23353,
-      name: "pizare",
-      toppings: "mushroom",
-      status: "completed",
-      duration: 3000,
-    },
-    {
-      id: 23353,
-      name: "pizare",
-      toppings: "mushroom",
-      status: "completed",
-      duration: 3000,
-    },
-    {
-      id: 23353,
-      name: "pizare",
-      toppings: "mushroom",
-      status: "completed",
-      duration: 3000,
-    },
-    {
-      id: 23353,
-      name: "pizare",
-      toppings: "mushroom",
-      status: "completed",
-      duration: 3000,
-    },
-  ];
-
+const CompletedPizzasList = ({ setCurrentId, orders }) => {
   return (
     <>
       <div className={classes.menuContainer}>
-        {completed.map((pizza) => {
+        {orders.map((pizza) => {
           return (
             <React.Fragment key={pizza.id}>
               <div className={classes.itemContainer} key={pizza.id}>
@@ -46,7 +15,7 @@ const CompletedPizzasList = (props) => {
                 <span className={classes.pizzaIngredients}>
                   {pizza.duration}
                 </span>
-                <ReportModal />
+                <ReportModal reportItem={pizza} setCurrentId={setCurrentId} />
               </div>
             </React.Fragment>
           );

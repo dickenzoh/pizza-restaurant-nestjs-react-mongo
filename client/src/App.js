@@ -12,12 +12,20 @@ import { useDispatch, useSelector } from "react-redux";
 
 function App() {
   const [tab, setTab] = useState("one");
+  const [currentId, setCurrentId] = useState(null);
 
   const dispatch = useDispatch();
-  const orders = useSelector((state) => state.orders);
+  const orders = useSelector((state) => state.order.orders);
 
-  console.log(tab);
+  const completedOrders = orders.filter((order) => {
+    if (order.status == "completed") {
+      return order;
+    }
+  });
+
+  console.log();
   console.log(orders);
+  console.log(completedOrders);
 
   useEffect(() => {
     dispatch(getOrders());
@@ -43,7 +51,14 @@ function App() {
           <CustomTabs onChange={(value) => setTab(value)} />
         </Box>
       </Box>
-      {tab === "one" ? <PizzasList /> : <CompletedPizzasList />}
+      {tab === "one" ? (
+        <PizzasList orders={orders} />
+      ) : (
+        <CompletedPizzasList
+          orders={completedOrders}
+          setCurrentId={setCurrentId}
+        />
+      )}
     </div>
   );
 }
