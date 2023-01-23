@@ -3,13 +3,14 @@ import { Document } from 'mongoose';
 
 
 // Nested Schema
-@Schema()
+@Schema({_id: false,  versionKey: false })
 export class SingleOrder extends Document {
   @Prop()
   name: string;
 
   @Prop({ type: [String] })
   toppings: string[];
+  
 
   @Prop()
   status: string;
@@ -26,7 +27,7 @@ class Toppings {
 }
 
 // Nested Schema
-@Schema()
+@Schema({_id: false, versionKey: false })
 export class PrepTime extends Document {
   @Prop()
   dough: number;

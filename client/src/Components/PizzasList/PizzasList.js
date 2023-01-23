@@ -15,17 +15,17 @@ const PizzasList = ({ orders }) => {
           return (
             <React.Fragment key={pizza.id}>
               <div className={classes.itemContainer} key={pizza.id}>
-                <span className={classes.pizzaName}>{pizza.name}</span>
+                <span className={classes.pizzaName}>{pizza.orders.name}</span>
                 <span className={classes.pizzaName}>{pizza.status}</span>
                 <span className={classes.pizzaIngredients}>
                   {pizza.toppings}
                 </span>
                 <div>
-                  <button className={classes.editButton} onClick={() => {}}>
-                    Edit
-                  </button>
                   <button className={classes.removeButton} onClick={() => {}}>
                     Remove
+                  </button>
+                  <button className={classes.editButton} onClick={() => {}}>
+                    Send
                   </button>
                 </div>
               </div>

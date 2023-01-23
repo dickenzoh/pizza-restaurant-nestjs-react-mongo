@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const API = axios.create({ baseURL: "https://server-ten-sand.vercel.app" });
+const API = axios.create({ baseURL: "http://localhost:3000/" });
 
 const initialState = {
   orders: [],
@@ -21,6 +21,20 @@ export const getOrders = createAsyncThunk(
       //thunkAPI.dispatch(openModal());
       const resp = await API.get("/orders");
       console.log("resp");
+      console.log(resp);
+
+      return resp.data;
+    } catch (error) {
+      console.log(error);
+      return thunkAPI.rejectWithValue("something went wrong");
+    }
+  }
+);
+export const createOrder = createAsyncThunk(
+  "order/createOrder",
+  async (newOrder, thunkAPI) => {
+    try {
+      const resp = await API.post("/orders", newOrder);
       console.log(resp);
 
       return resp.data;

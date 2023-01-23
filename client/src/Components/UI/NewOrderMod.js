@@ -6,28 +6,58 @@ import Fade from "@mui/material/Fade";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import MultipleSelectChip from "./Modal";
-import { FormControl, InputLabel, NativeSelect } from "@mui/material";
+import {
+  FormControl,
+  IconButton,
+  InputLabel,
+  NativeSelect,
+  TextField,
+} from "@mui/material";
+import { createOrder } from "../../features/order/orderSlice";
+import { useDispatch } from "react-redux";
 
 const style = {
   position: "absolute",
-  top: "50%",
-  left: "50%",
+  top: "25%",
+  left: "45%",
   transform: "translate(-50%, -50%)",
-  width: 400,
+  width: 700,
+  height: 400,
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
+  m: 10,
 };
 
 export default function TransitionsModal() {
   const [open, setOpen] = React.useState(false);
+  const [postData, setPostData] = React.useState({
+    name: "",
+    toppings: "",
+  });
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const dispatch = useDispatch();
+
+  const handleAddToCart = (e) => {
+    dispatch(handleClose());
+    dispatch(createOrder(postData));
+    dispatch(
+      setPostData({
+        name: "",
+        toppings: "",
+      })
+    );
+  };
+
+  console.log(postData);
 
   return (
     <div>
       <Button onClick={handleOpen}>Add New Order</Button>
+
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -44,32 +74,48 @@ export default function TransitionsModal() {
             <Typography id="transition-modal-title" variant="h6" component="h2">
               Create an Order
             </Typography>
-            <FormControl fullWidth>
+            <FormControl fullWidth sx={{ mt: "30px" }}>
               <InputLabel variant="standard" htmlFor="uncontrolled-native">
                 Pizza Name
               </InputLabel>
               <NativeSelect
-                defaultValue={30}
+                defaultValue={10}
+                onChange={(event) =>
+                  setPostData({
+                    ...postData,
+                    name: event.target.value,
+                  })
+                }
                 inputProps={{
-                  name: "age",
+                  name: "name",
                   id: "uncontrolled-native",
                 }}
               >
-                <option value={10}>Mushrooms</option>
-                <option value={20}>Corn</option>
-                <option value={30}>Olive</option>
-                <option value={30}>Extra Cheese</option>
-                <option value={30}>Anchovies</option>
+                <option value={10}>Neapolitan Pizza</option>
+                <option value={20}>Chicago Pizza</option>
+                <option value={30}>New York-Style Pizza</option>
+                <option value={40}>Sicilian Pizza</option>
               </NativeSelect>
               <Typography
+                sx={{ mt: "30px" }}
                 id="transition-modal-title"
                 variant="h6"
                 component="h2"
               >
                 Select toppings
               </Typography>
-              <MultipleSelectChip />
-              <Button>Add</Button>
+              <MultipleSelectChip
+                postData={postData}
+                setPostData={setPostData}
+              />
+              <Button
+                sx={{ mt: "20px" }}
+                variant="contained"
+                size="small"
+                onClick={handleAddToCart}
+              >
+                Add to cart
+              </Button>
             </FormControl>
           </Box>
         </Fade>

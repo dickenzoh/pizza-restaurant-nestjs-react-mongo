@@ -21,11 +21,12 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 700,
+
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
+  m: 10,
 };
 
 export default function ReportModal({ reportItem, setCurrentId }) {
@@ -73,6 +74,9 @@ export default function ReportModal({ reportItem, setCurrentId }) {
             >
               <Divider style={{ backgroundColor: "#6605B8" }} />
             </Box>
+            <Typography id="transition-modal-title" variant="h6" component="h6">
+              Pizza List
+            </Typography>
             <List
               sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
             >
