@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const API = axios.create({ baseURL: "http://localhost:3000/" });
-
+const API = axios.create({ baseURL: "http://localhost:3000" });
+//https://server-dickenzoh.vercel.app
 const initialState = {
   orders: [],
   amount: 4,
@@ -36,6 +36,7 @@ export const createOrder = createAsyncThunk(
     try {
       const resp = await API.post("/orders", newOrder);
       console.log(resp);
+      console.log("created order");
 
       return resp.data;
     } catch (error) {

@@ -30,7 +30,7 @@ function getStyles(name, personName, theme) {
   };
 }
 
-export default function MultipleSelectChip({ postData, setPostData }) {
+export default function MultipleSelectChip({ orderData, setOrderData }) {
   const theme = useTheme();
   const [topping, setTopping] = React.useState([]);
 
@@ -42,7 +42,7 @@ export default function MultipleSelectChip({ postData, setPostData }) {
       // On autofill we get a stringified value.
       typeof value === "string" ? value.split(",") : value
     );
-    setPostData({ ...postData, toppings: event.target.value });
+    setOrderData({ ...orderData, toppings: event.target.value });
   };
 
   return (

@@ -32,9 +32,23 @@ const style = {
 
 export default function TransitionsModal() {
   const [open, setOpen] = React.useState(false);
-  const [postData, setPostData] = React.useState({
+  const [orderData, setOrderData] = React.useState({
     name: "",
     toppings: "",
+  });
+  const [postData, setPostData] = React.useState({
+    orders: {
+      orderData,
+    },
+    createdAt: 11,
+    completedtAt: 12,
+    status: "completed",
+    preptime: {
+      dough: 10,
+      toppings: 20,
+      oven: 30,
+      waiter: 40,
+    },
   });
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -42,17 +56,18 @@ export default function TransitionsModal() {
   const dispatch = useDispatch();
 
   const handleAddToCart = (e) => {
-    dispatch(handleClose());
+    console.log("added to cart");
+    //dispatch(handleClose());
     dispatch(createOrder(postData));
     dispatch(
-      setPostData({
+      setOrderData({
         name: "",
         toppings: "",
       })
     );
   };
 
-  console.log(postData);
+  console.log(orderData);
 
   return (
     <div>
@@ -81,8 +96,8 @@ export default function TransitionsModal() {
               <NativeSelect
                 defaultValue={10}
                 onChange={(event) =>
-                  setPostData({
-                    ...postData,
+                  setOrderData({
+                    ...orderData,
                     name: event.target.value,
                   })
                 }
@@ -105,8 +120,8 @@ export default function TransitionsModal() {
                 Select toppings
               </Typography>
               <MultipleSelectChip
-                postData={postData}
-                setPostData={setPostData}
+                orderData={orderData}
+                setOrderData={setOrderData}
               />
               <Button
                 sx={{ mt: "20px" }}
