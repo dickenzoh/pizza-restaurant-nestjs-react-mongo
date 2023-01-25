@@ -30,19 +30,21 @@ function getStyles(name, personName, theme) {
   };
 }
 
-export default function MultipleSelectChip({ orderData, setOrderData }) {
+export default function MultipleSelectChip({
+  pizzaToppings,
+  setPizzaToppings,
+}) {
   const theme = useTheme();
-  const [topping, setTopping] = React.useState([]);
 
   const handleChange = (event) => {
     const {
       target: { value },
     } = event;
-    setTopping(
+    setPizzaToppings(
       // On autofill we get a stringified value.
       typeof value === "string" ? value.split(",") : value
     );
-    setOrderData({ ...orderData, toppings: event.target.value });
+    //setPizzaToppings( event.target.value );
   };
 
   return (
@@ -53,7 +55,7 @@ export default function MultipleSelectChip({ orderData, setOrderData }) {
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
           multiple
-          value={topping}
+          value={pizzaToppings}
           onChange={handleChange}
           input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
           renderValue={(selected) => (
@@ -69,7 +71,7 @@ export default function MultipleSelectChip({ orderData, setOrderData }) {
             <MenuItem
               key={name}
               value={name}
-              style={getStyles(name, topping, theme)}
+              //style={getStyles(name, topping, theme)}
             >
               {name}
             </MenuItem>

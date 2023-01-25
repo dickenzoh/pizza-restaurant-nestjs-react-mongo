@@ -29,11 +29,12 @@ const style = {
   m: 10,
 };
 
-export default function ReportModal({ reportItem, setCurrentId }) {
+export default function ReportModal({ reportItem }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   console.log(reportItem);
+  console.log(reportItem.orders);
 
   return (
     <div>
@@ -80,15 +81,16 @@ export default function ReportModal({ reportItem, setCurrentId }) {
             <List
               sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
             >
-              <ListItem>
-                <ListItemText primary="Photos" secondary="Jan 9, 2014" />
-              </ListItem>
-              <ListItem>
-                <ListItemText primary="Photos" secondary="Jan 9, 2014" />
-              </ListItem>
-              <ListItem>
-                <ListItemText primary="Photos" secondary="Jan 9, 2014" />
-              </ListItem>
+              {reportItem.orders.map((order) => {
+                <ListItem>
+                  <ListItemText
+                    primary={order.name}
+                    secondary={order.toppings.map((item) => {
+                      console.log(item);
+                    })}
+                  />
+                </ListItem>;
+              })}
             </List>
           </Box>
         </Fade>

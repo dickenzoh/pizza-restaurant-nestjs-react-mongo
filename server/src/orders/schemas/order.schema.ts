@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, now } from 'mongoose';
 
 
 // Nested Schema
@@ -44,12 +44,13 @@ export class PrepTime extends Document {
 export const PrepTimeSchema = SchemaFactory.createForClass(PrepTime);
 
 // Parent Schema
-@Schema()
+@Schema({timestamps: true})
 export class OrderClass extends Document {
   @Prop({ type: SingleOrder })
       orders: SingleOrder;
-  @Prop()
-  createdAt: number;
+
+  @Prop({default: now()})
+    createdAt: Date;
 
   @Prop()
   completedAt: number;

@@ -21,7 +21,7 @@ export interface Order {
 
    orders: SingleOrder;
 
-   createdAt: number;
+   createdAt: Date;
 
    completedAt: number;
 

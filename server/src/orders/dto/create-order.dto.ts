@@ -18,7 +18,7 @@ export class PrepTimeDto {
 export class CreateOrderDto {
   readonly orders: SingleOrderDto;
 
-  readonly createdAt: number;
+  readonly createdAt: Date;
 
   readonly completedAt: number;
 

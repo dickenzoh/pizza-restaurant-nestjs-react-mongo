@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import classes from "./PizzasList.module.css";
-import TransitionsModal from "../UI/NewOrderMod";
+import NewOrderModal from "../UI/NewOrderMod";
 
 const PizzasList = ({ orders }) => {
   return (
@@ -8,7 +8,7 @@ const PizzasList = ({ orders }) => {
       <div className={classes.menuContainer}>
         <div className={classes.itemContainer}>
           <button className={classes.editButton}>
-            <TransitionsModal />
+            <NewOrderModal />
           </button>
         </div>
         {orders.map((pizza) => {
@@ -16,7 +16,7 @@ const PizzasList = ({ orders }) => {
             <React.Fragment key={pizza.id}>
               <div className={classes.itemContainer} key={pizza.id}>
                 <span className={classes.pizzaName}>{pizza.orders.name}</span>
-                <span className={classes.pizzaName}>{pizza.status}</span>
+                <span className={classes.pizzaName}>{pizza.orders.status}</span>
                 <span className={classes.pizzaIngredients}>
                   {pizza.toppings}
                 </span>

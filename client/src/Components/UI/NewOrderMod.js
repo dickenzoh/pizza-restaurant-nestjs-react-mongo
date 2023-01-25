@@ -30,18 +30,18 @@ const style = {
   m: 10,
 };
 
-export default function TransitionsModal() {
+export default function NewOrderModal() {
   const [open, setOpen] = React.useState(false);
-  const [orderData, setOrderData] = React.useState({
-    name: "",
-    toppings: "",
-  });
+  const [pizzaName, setPizzaName] = React.useState("");
+  const [pizzaToppings, setPizzaToppings] = React.useState([]);
   const [postData, setPostData] = React.useState({
     orders: {
-      orderData,
+      name: "",
+      toppings: [],
+      status: "completed",
+      duration: 10,
     },
     createdAt: 11,
-    completedtAt: 12,
     status: "completed",
     preptime: {
       dough: 10,
@@ -50,28 +50,61 @@ export default function TransitionsModal() {
       waiter: 40,
     },
   });
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const dispatch = useDispatch();
 
-  const handleAddToCart = (e) => {
-    console.log("added to cart");
-    //dispatch(handleClose());
-    dispatch(createOrder(postData));
-    dispatch(
-      setOrderData({
+  const clearForm = () => {
+    setPostData({
+      orders: {
         name: "",
+        toppings: [],
+        status: "",
+        duration: "",
+      },
+      createdAt: "",
+      status: "",
+      preptime: {
+        dough: "",
         toppings: "",
-      })
-    );
+        oven: "",
+        waiter: "",
+      },
+    });
   };
 
-  console.log(orderData);
+  const handleAddToCart = (e) => {
+    console.log("added to cart");
+    setPostData({
+      orders: {
+        name: pizzaName,
+        toppings: pizzaToppings,
+        status: "",
+        duration: "",
+      },
+      createdAt: "",
+      status: "",
+      preptime: {
+        dough: "",
+        toppings: "",
+        oven: "",
+        waiter: "",
+      },
+    });
+    dispatch(createOrder(postData));
+    dispatch(handleClose());
+    //dispatch(clearForm());
+  };
+
+  console.log(pizzaName);
+  console.log(pizzaToppings);
+  console.log(postData);
 
   return (
     <div>
-      <Button onClick={handleOpen}>Add New Order</Button>
+      <Button onClick={handleOpen}>Add New Pizza</Button>
 
       <Modal
         aria-labelledby="transition-modal-title"
@@ -87,7 +120,7 @@ export default function TransitionsModal() {
         <Fade in={open}>
           <Box sx={style}>
             <Typography id="transition-modal-title" variant="h6" component="h2">
-              Create an Order
+              Create your pizza
             </Typography>
             <FormControl fullWidth sx={{ mt: "30px" }}>
               <InputLabel variant="standard" htmlFor="uncontrolled-native">
@@ -95,21 +128,18 @@ export default function TransitionsModal() {
               </InputLabel>
               <NativeSelect
                 defaultValue={10}
-                onChange={(event) =>
-                  setOrderData({
-                    ...orderData,
-                    name: event.target.value,
-                  })
-                }
+                onChange={(event) => setPizzaName(event.target.value)}
                 inputProps={{
-                  name: "name",
+                  name: "orders.name",
                   id: "uncontrolled-native",
                 }}
               >
-                <option value={10}>Neapolitan Pizza</option>
-                <option value={20}>Chicago Pizza</option>
-                <option value={30}>New York-Style Pizza</option>
-                <option value={40}>Sicilian Pizza</option>
+                <option value={"Neapolitan Pizza"}>Neapolitan Pizza</option>
+                <option value={"Chicago Pizza"}>Chicago Pizza</option>
+                <option value={"New York-Style Pizza"}>
+                  New York-Style Pizza
+                </option>
+                <option value={"Sicilian Pizza"}>Sicilian Pizza</option>
               </NativeSelect>
               <Typography
                 sx={{ mt: "30px" }}
@@ -120,16 +150,16 @@ export default function TransitionsModal() {
                 Select toppings
               </Typography>
               <MultipleSelectChip
-                orderData={orderData}
-                setOrderData={setOrderData}
+                pizzaToppings={pizzaToppings}
+                setPizzaToppings={setPizzaToppings}
               />
               <Button
-                sx={{ mt: "20px" }}
+                sx={{ mt: "20px", borderRadius: "10px" }}
                 variant="contained"
                 size="small"
                 onClick={handleAddToCart}
               >
-                Add to cart
+                Add
               </Button>
             </FormControl>
           </Box>
